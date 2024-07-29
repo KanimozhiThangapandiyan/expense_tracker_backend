@@ -1,0 +1,14 @@
+.env
+
+apps/*/migrations/
+
+apps.common.migrations
+apps.cms.migrations
+apps.expenses.migrations
+apps.web.migrations
+
+ **/migrations/*
+ !**/migrations/__init__.py
+
+__pycache__
+/__pycache__/

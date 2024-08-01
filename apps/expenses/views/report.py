@@ -19,4 +19,4 @@ class GenerateReportView(APIView):
         # Enqueue the Celery task
         generate_report(period, start_date_str, end_date_str, user)
         
-        return Response({"message": "Report generation has been initiated."}, status=status.HTTP_202_ACCEPTED)
+        return Response({"message": "Report has been sended to user's registered mail id."}, status=status.HTTP_202_ACCEPTED)

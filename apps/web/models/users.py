@@ -13,7 +13,7 @@ class User(Base,AbstractBaseUser,PermissionsMixin):
     phone_number = models.CharField(max_length=MAX_LENGTH_PHONE, unique=True)
     alternative_phone_number = models.CharField(max_length=MAX_LENGTH_PHONE, **DEFAULT_NULLABLE)
     date_of_birth = models.DateField()
-    password = models.CharField(max_length=MAX_LENGTH)
+    password = models.CharField(max_length=120)
 
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
@@ -24,9 +24,6 @@ class User(Base,AbstractBaseUser,PermissionsMixin):
     REQUIRED_FIELDS = ['first_name','last_name','password']
 
     username = None
-    def check_password(self, raw_password):
-        """Check if the provided password matches the stored password."""
-        return self.password == raw_password
     
     def __str__(self):
         return f"{self.first_name} {self.last_name}"

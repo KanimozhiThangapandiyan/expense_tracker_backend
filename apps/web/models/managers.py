@@ -1,6 +1,7 @@
 from django.contrib.auth.models import BaseUserManager
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned, ValidationError
 from datetime import date
+from django.contrib.auth.hashers import make_password
 
 class UserManager(BaseUserManager):
     """Manager for User model with email-based authentication."""
@@ -11,7 +12,8 @@ class UserManager(BaseUserManager):
             raise ValueError("The given email ID must be set")
         email_id = self.normalize_email(email_id)
         user = self.model(email_id=email_id, **extra_fields)
-        user.password = password
+        if password:
+            user.password = make_password(password)
         user.save(using=self._db)
         return user
 

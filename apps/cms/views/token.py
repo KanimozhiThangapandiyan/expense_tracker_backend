@@ -6,6 +6,7 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth import logout
 from rest_framework.permissions import AllowAny,IsAuthenticated
 from apps.cms.models import SystemLog
+from django.contrib.auth.hashers import check_password
 
 class AuthenticateUserView(APIView):
     permission_classes = [AllowAny]
@@ -18,7 +19,7 @@ class AuthenticateUserView(APIView):
         except User.DoesNotExist:
             return Response({"error": "Invalid credentials"}, status=status.HTTP_400_BAD_REQUEST)
 
-        if not user.check_password(password):
+        if not check_password(password, user.password):
             return Response({"error": "Invalid credentials"}, status=status.HTTP_400_BAD_REQUEST)
 
         token, created = Token.objects.get_or_create(user=user)

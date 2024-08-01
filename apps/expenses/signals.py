@@ -43,8 +43,3 @@ def check_and_notify_budget(user):
 def update_expense_amount(sender, instance, created, **kwargs):
     if instance.type == 'expense':
         check_and_notify_budget(instance.user_id)
-
-@receiver(post_delete, sender=ExpenseAndIncome)
-def delete_expense_amount(sender, instance, **kwargs):
-    if instance.type == 'expense':
-        check_and_notify_budget(instance.user_id)

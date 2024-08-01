@@ -7,6 +7,4 @@ urlpatterns = [
     path('users/inactive/<int:pk>/', SoftDeleteUserView.as_view(), name='user-soft-delete'),
     path('dashboard/', UserDashboardView.as_view(), name='user_dashboard'),
     path('logout/', LogoutView.as_view(), name='logout'),
-
-
 ]

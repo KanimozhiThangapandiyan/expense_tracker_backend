@@ -1,6 +1,7 @@
 from django.db import models
 from apps.common.models import Base,DEFAULT_NULLABLE,SingleChoiceField
 from apps.web.models import User
+from auditlog.registry import auditlog
 
 AMOUNT_TYPE_CHOICES = {
     "options": [
@@ -46,4 +47,5 @@ class ExpenseAndIncome(Base):
 
 
     def __str__(self):
-        return f"{self.type.capitalize()} - {self.amount}"  
+        return f"{self.type.capitalize()} - {self.amount}"
+auditlog.register(ExpenseAndIncome)

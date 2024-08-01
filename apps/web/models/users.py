@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser,PermissionsMixin
 from apps.common.models import Base,MAX_LENGTH,MAX_LENGTH_PHONE,DEFAULT_NULLABLE
 from .managers import UserManager
-
+from auditlog.registry import auditlog
 
 class User(Base,AbstractBaseUser,PermissionsMixin):
     """User model with email as the unique identifier"""
@@ -27,4 +27,4 @@ class User(Base,AbstractBaseUser,PermissionsMixin):
     
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
-    
+auditlog.register(User)

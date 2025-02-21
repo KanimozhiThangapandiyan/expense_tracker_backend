@@ -59,7 +59,7 @@ MIDDLEWARE = [
     'auditlog.middleware.AuditlogMiddleware',
 ]
 
-ROOT_URLCONF = 'exp_tracker_backend.urls'
+ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
     {
@@ -77,7 +77,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'exp_tracker_backend.wsgi.application'
+WSGI_APPLICATION = 'config.wsgi.application'
 
 
 # Database
@@ -86,11 +86,11 @@ WSGI_APPLICATION = 'exp_tracker_backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'expensetracker',
-        'USER': 'postgres',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
         'PASSWORD':config('DB_PASSWORD'),
-        'HOST': 'localhost',
-        'PORT':'5432'
+        'HOST': config('DB_HOST'),
+        'PORT':config('DB_PORT'),
     }
 }
 

@@ -8,7 +8,7 @@ MAX_LENGTH_PHONE = 15
 DEFAULT_NULLABLE = {'blank': True, 'null': True}
 
 class Base(models.Model):
-    uuid = models.UUIDField(default=uuid.uuid4, editable=False)  
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False)
     created = models.DateTimeField(default=datetime.now, editable=False)
     updated = models.DateTimeField(auto_now=True,editable=False)
     is_deleted = models.BooleanField(default=False)

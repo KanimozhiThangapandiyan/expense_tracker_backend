@@ -26,4 +26,3 @@ urlpatterns = [
     path('exp-inc/',include('apps.expenses.urls')),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-

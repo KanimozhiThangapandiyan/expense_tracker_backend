@@ -61,7 +61,7 @@ class ExpenseAnalysisView(APIView):
             return Response({"error": "Invalid analysis_type parameter"}, status=400)
         # Save chart to a file and construct URL
         chart_url = self.save_chart_to_file(chart, request)
-        
+
         return Response({"chart_url": chart_url})
 
     def generate_pie_chart(self, df, category_wise, spending_type_wise):

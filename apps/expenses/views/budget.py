@@ -21,7 +21,7 @@ class BudgetLCView(generics.ListCreateAPIView):
 
         # Check if the user already has an active budget
         active_budget_exists = Budget.objects.filter(
-            user_id=user_id, 
+            user_id=user_id,
             end_date__gte=start_date
         ).exists()
 

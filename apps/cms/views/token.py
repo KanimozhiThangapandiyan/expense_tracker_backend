@@ -37,7 +37,7 @@ class AuthenticateUserView(APIView):
             },
             "token": token.key
         }, status=status.HTTP_200_OK)
-    
+
 class LogoutView(APIView):
     permission_classes = (IsAuthenticated,)
 

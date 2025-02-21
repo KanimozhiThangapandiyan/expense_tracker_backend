@@ -15,8 +15,8 @@ class GenerateReportView(APIView):
             return Response({"error": "Invalid period."}, status=status.HTTP_400_BAD_REQUEST)
         if period == 'custom' and (not start_date_str or not end_date_str):
             return Response({"error": "Custom period requires start_date and end_date."}, status=status.HTTP_400_BAD_REQUEST)
-        user=request.user   
+        user=request.user
         # Enqueue the Celery task
         generate_report(period, start_date_str, end_date_str, user)
-        
+
         return Response({"message": "Report has been sended to user's registered mail id."}, status=status.HTTP_202_ACCEPTED)

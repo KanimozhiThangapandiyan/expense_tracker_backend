@@ -18,7 +18,7 @@ def send_welcome_email(sender, instance, created, **kwargs):
         """
         from_email = settings.EMAIL_HOST_USER
         recipient_list = [instance.email_id]
-        
+
         send_mail(
             subject,
             message,

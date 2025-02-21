@@ -21,7 +21,7 @@ def check_and_notify_budget(user):
 
     from_email = settings.EMAIL_HOST_USER
     recipient_list = [user.email_id]
-    if total_expenses >= current_budget.amount:    
+    if total_expenses >= current_budget.amount:
         send_mail(
             'Budget Notification',
             'You have exceeded your budget.',

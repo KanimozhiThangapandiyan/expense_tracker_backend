@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'auditlog',
 
+    'apps.access',
     'apps.cms',
     'apps.common',
     'apps.expenses',
@@ -94,7 +95,7 @@ DATABASES = {
     }
 }
 
-AUTH_USER_MODEL = 'web.User'
+AUTH_USER_MODEL = 'access.User'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

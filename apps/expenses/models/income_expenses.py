@@ -1,6 +1,6 @@
 from django.db import models
 from apps.common.models import Base,DEFAULT_NULLABLE,SingleChoiceField
-from apps.web.models import User
+from apps.access.models import User
 from auditlog.registry import auditlog
 
 AMOUNT_TYPE_CHOICES = {

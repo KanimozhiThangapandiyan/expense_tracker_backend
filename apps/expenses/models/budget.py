@@ -1,6 +1,6 @@
 from django.db import models
 from apps.common.models import Base
-from apps.web.models import User
+from apps.access.models import User
 from auditlog.registry import auditlog
 
 class Budget(Base):

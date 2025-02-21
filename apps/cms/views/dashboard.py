@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.views import View
-from apps.web.models import User
+from apps.access.models import User
 
 class UserDashboardView(View):
     def get(self, request, *args, **kwargs):

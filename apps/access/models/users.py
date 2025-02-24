@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser,PermissionsMixin
 from apps.common.models import Base,MAX_LENGTH,MAX_LENGTH_PHONE,DEFAULT_NULLABLE
-from .managers import UserManager
+from apps.common.managers import UserManager
 from auditlog.registry import auditlog
 
 class User(Base,AbstractBaseUser,PermissionsMixin):

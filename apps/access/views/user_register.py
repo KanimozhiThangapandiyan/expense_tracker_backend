@@ -2,7 +2,7 @@ from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework import status
 from apps.access.models import User
-from apps.web.serializers import UserSerializer
+from apps.access.serializers import UserSerializer
 from rest_framework.permissions import AllowAny
 
 class RegisterUserView(generics.CreateAPIView):

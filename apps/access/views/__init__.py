@@ -1,2 +1,2 @@
 from .user_register import RegisterUserView,UserDetailView
-from .authenicate import AuthenticateUserView,LogoutView
+from .authenicate import AuthenticateUserView,LogoutView,KeycloakLoginView

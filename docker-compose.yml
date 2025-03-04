@@ -1,6 +1,16 @@
 version: '3.8'
 
 services:
+  keycloak:
+    image: quay.io/keycloak/keycloak
+    container_name: keycloak
+    ports:
+      - "8080:8080"
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    command: start-dev
+
   web:
     build: .
     container_name: expense_tracker_backend

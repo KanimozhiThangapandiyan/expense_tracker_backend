@@ -6,7 +6,7 @@ from apps.access.keycloak_utils import create_keycloak_user
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email_id', 'phone_number', 'alternative_phone_number', 'date_of_birth','password']
+        fields = ['first_name', 'last_name', 'email_id', 'phone_number', 'alternative_phone_number', 'date_of_birth','password', 'role']
         extra_kwargs = {
             'password': {'write_only': True},
             'alternative_phone_number': {'required': False},

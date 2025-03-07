@@ -18,6 +18,8 @@ class User(Base,AbstractBaseUser,PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
+    role = models.ForeignKey("access.Role", on_delete=models.SET_NULL, **DEFAULT_NULLABLE)
+
     objects = UserManager()
 
     USERNAME_FIELD = 'email_id'

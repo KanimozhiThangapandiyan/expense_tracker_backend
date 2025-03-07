@@ -7,11 +7,11 @@ from apps.access.models import User
 @receiver(post_save, sender=User)
 def send_welcome_email(sender, instance, created, **kwargs):
     if created:
-        subject = 'Welcome to Our Platform!'
+        subject = 'Welcome to Expense Tracker'
         message = f"""
         Hi {instance.first_name},
 
-        Welcome to our platform! We are thrilled to have you join our community.
+        Welcome to Expense tracker platform! We are thrilled to have you join our community.
 
         Best regards,
         The Team

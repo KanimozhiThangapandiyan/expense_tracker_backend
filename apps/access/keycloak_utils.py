@@ -12,16 +12,16 @@ keycloak_openid = KeycloakOpenID(
     verify=settings.KEYCLOAK_VERIFY_SSL
 )
 
-#Function to authenticate user
 def get_token(email, password):
+    """Function to authenticate user using Keycloak."""
     try:
         token = keycloak_openid.token(email, password)
         return token
     except Exception as e:
         raise Exception(f"Keycloak Authentication Failed: {e}")
 
-# Function to get Keycloak admin token
 def get_admin_token():
+    """Function to get the admin token for Keycloak."""
     token_url = f"{settings.KEYCLOAK_SERVER_URL}/realms/{settings.KEYCLOAK_REALM}/protocol/openid-connect/token"
     data = {
         "grant_type": "client_credentials",
@@ -31,7 +31,6 @@ def get_admin_token():
     response = requests.post(token_url, data=data)
     return response.json().get("access_token")
 
-#Function to create user in keycloak
 def create_keycloak_user(user, password):
     """Creates a new user in Keycloak."""
     keycloak_token = get_admin_token()
@@ -61,6 +60,23 @@ def create_keycloak_user(user, password):
 
     if response.status_code != 201:
         raise Exception(f"Keycloak Error: {response.json()}")
+       
+def get_new_access_token(refresh_token):
+    """ Function to refresh the access token using the refresh token."""
+
+    token_url = f"{settings.KEYCLOAK_SERVER_URL}/realms/{settings.KEYCLOAK_REALM}/protocol/openid-connect/token"
+    data = {
+        "client_id": settings.KEYCLOAK_CLIENT_ID,
+        "client_secret": settings.KEYCLOAK_CLIENT_SECRET,
+        "grant_type": "refresh_token",
+        "refresh_token": refresh_token,
+    }
+    response = requests.post(token_url, data=data)
+    if response.status_code == 200:
+        tokens = response.json()
+        return tokens["access_token"], tokens.get("refresh_token")
+    else:
+        return None, response.json().get("error_description", "Failed to refresh token")
 
 class KeycloakUser:
     """Custom user object to attach user info."""

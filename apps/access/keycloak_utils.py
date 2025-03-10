@@ -1,6 +1,8 @@
 import requests
 from keycloak import KeycloakOpenID
 from django.conf import settings
+from rest_framework.authentication import BaseAuthentication
+from rest_framework.exceptions import AuthenticationFailed
 
 keycloak_openid = KeycloakOpenID(
     server_url=settings.KEYCLOAK_SERVER_URL,
@@ -59,3 +61,27 @@ def create_keycloak_user(user, password):
 
     if response.status_code != 201:
         raise Exception(f"Keycloak Error: {response.json()}")
+
+class KeycloakUser:
+    """Custom user object to attach user info."""
+    def __init__(self, user_info):
+        self.user_info = user_info
+        self.username = user_info.get("preferred_username", "")
+        self.email = user_info.get("email", "")
+        self.is_authenticated = True
+
+    def __str__(self):
+        return self.username
+
+class KeycloakAuthentication(BaseAuthentication):
+    """Custom authentication class to authenticate users using Keycloak."""
+    def authenticate(self, request):
+        auth_header = request.headers.get("Authorization")
+        if not auth_header or not auth_header.startswith("Bearer "):
+            return None
+        token = auth_header.split(" ")[1]
+        try:
+            user_info = keycloak_openid.userinfo(token) # Get user info from token
+            return (KeycloakUser(user_info), None)  # Attach user info to request.user
+        except Exception:
+            raise AuthenticationFailed("Invalid or expired token")

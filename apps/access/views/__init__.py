@@ -1,3 +1,3 @@
 from .user_register import RegisterUserView,UserDetailView
-from .authenicate import AuthenticateUserView,LogoutView,KeycloakLoginView
+from .authenicate import AuthenticateUserView,LogoutView,KeycloakLoginView,RefreshTokenAPIView
 from .roles_and_permission import RoleViewSet,PermissionViewSet,ContentTypeListView

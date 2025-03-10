@@ -8,7 +8,7 @@ from rest_framework.permissions import AllowAny,IsAuthenticated
 from apps.cms.models import SystemLog
 from django.contrib.auth.hashers import check_password
 from apps.access.models import User
-from apps.access.keycloak_utils import get_token
+from apps.access.keycloak_utils import get_token,get_new_access_token
 from django.shortcuts import get_object_or_404
 
 class AuthenticateUserView(APIView):
@@ -62,3 +62,21 @@ class KeycloakLoginView(APIView):
         if not token:
             return Response({"error": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED)
         return Response(token, status=status.HTTP_200_OK)
+
+class RefreshTokenAPIView(APIView):
+    """API view to refresh the access token using the refresh token."""
+
+    permission_classes = [AllowAny]
+    def post(self, request):
+        refresh_token = request.data.get("refresh_token")
+        access_token, error = get_new_access_token(refresh_token)
+        if access_token:
+            return Response(
+                {
+                    "access_token": access_token,
+                    "refresh_token": refresh_token,
+                },
+                status=status.HTTP_200_OK,
+            )
+        else:
+            return Response({"error": error},status=status.HTTP_401_UNAUTHORIZED)

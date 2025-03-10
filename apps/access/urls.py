@@ -1,7 +1,7 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from apps.access.views import RegisterUserView,UserDetailView,AuthenticateUserView,LogoutView,KeycloakLoginView,\
-    RoleViewSet,PermissionViewSet,ContentTypeListView
+    RoleViewSet,PermissionViewSet,ContentTypeListView,RefreshTokenAPIView
 
 router = DefaultRouter()
 router.register(r'role', RoleViewSet)
@@ -14,5 +14,6 @@ urlpatterns = [
     path('login/', AuthenticateUserView.as_view(), name='authenticate'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('kc-login/', KeycloakLoginView.as_view(), name='kc-authentication'),
+    path('refresh-token/', RefreshTokenAPIView.as_view(), name='refresh-kc-token'),
     path('models/', ContentTypeListView.as_view(), name='model-list'),
 ]
